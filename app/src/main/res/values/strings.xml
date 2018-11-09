@@ -12,4 +12,5 @@
         <item>Gallons</item>
         <item>Quarts</item>
     </string-array>
+    <string name="title_activity_history">HistoryActivity</string>
 </resources>

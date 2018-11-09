@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
@@ -15,13 +16,18 @@ import android.widget.Toolbar;
 public class MainActivity extends AppCompatActivity{
 
     public static final int TYPE_SELECTION = 1;
+    public static final int HISTORY_RESULT = 1;
     private UnitsConverter.LengthUnits from_unit_length = UnitsConverter.LengthUnits.Meters;
     private UnitsConverter.LengthUnits to_unit_length = UnitsConverter.LengthUnits.Yards;
     private UnitsConverter.VolumeUnits from_unit_volume = UnitsConverter.VolumeUnits.Liters;
     private UnitsConverter.VolumeUnits to_unit_volume = UnitsConverter.VolumeUnits.Gallons;
     private  TextView from_label;
     private TextView to_label;
+    private TextView title;
     public static String UnitType = "Length";
+
+    private EditText from_input;
+    private EditText to_input;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,9 +36,9 @@ public class MainActivity extends AppCompatActivity{
 
         //Toolbar mTopToolbar = findViewById(R.id.Settings);
 
-        TextView title = (TextView) findViewById(R.id.title);
-        EditText from_input = (EditText) findViewById(R.id.top_input);
-        EditText to_input = (EditText) findViewById(R.id.bottom_input);
+        title = (TextView) findViewById(R.id.title);
+        from_input = (EditText) findViewById(R.id.top_input);
+        to_input = (EditText) findViewById(R.id.bottom_input);
         Button calculate = (Button) findViewById(R.id.calculate);
         Button clear = (Button) findViewById(R.id.clear);
         Button mode = (Button) findViewById(R.id.mode);
@@ -142,6 +148,27 @@ public class MainActivity extends AppCompatActivity{
     }*/
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if(item.getItemId() == R.id.Settings) {
+            Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
+            startActivityForResult(intent, TYPE_SELECTION);
+            return true;
+        }else if(item.getItemId() == R.id.action_history) {
+            Intent intent = new Intent(MainActivity.this, HistoryActivity.class);
+            startActivityForResult(intent, HISTORY_RESULT);
+            return true;
+        }
+        return false;
+    }
+
+
+    @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data){
         if(resultCode == TYPE_SELECTION){
             String toString = data.getStringExtra("to_select");
@@ -156,8 +183,18 @@ public class MainActivity extends AppCompatActivity{
             }
             to_label.setText(toString);
             from_label.setText(fromString);
+        }else if (resultCode == HISTORY_RESULT){
+            String[] vals = data.getStringArrayExtra("item");
+            this.from_input.setText(vals[0]);
+            this.from_input.setText(vals[1]);
+            //this.mode = Mode.valueOf(vals[2]);
+            this.from_label.setText(vals[3]);
+            this.to_label.setText(vals[4]);
+            //this.title.setText(mode.toString() + " Converter");
         }
+
+    }
     }
 
 
-}
+
