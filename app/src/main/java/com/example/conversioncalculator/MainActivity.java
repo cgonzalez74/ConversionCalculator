@@ -42,20 +42,11 @@ public class MainActivity extends AppCompatActivity{
         Button calculate = (Button) findViewById(R.id.calculate);
         Button clear = (Button) findViewById(R.id.clear);
         Button mode = (Button) findViewById(R.id.mode);
-        Button settings = findViewById(R.id.settings_button);
         from_label = (TextView) findViewById(R.id.top_label);
         to_label = (TextView) findViewById(R.id.bottom_label);
 
         title.setText("Length Converter");
 
-
-        settings.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view){
-                Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
-                startActivityForResult(intent, TYPE_SELECTION);
-            }
-            });
 
         calculate.setOnClickListener(v -> {
 
