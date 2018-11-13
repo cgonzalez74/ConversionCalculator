@@ -13,10 +13,14 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toolbar;
 
+import com.example.conversioncalculator.dummy.HistoryContent;
+
+import org.joda.time.DateTime;
+
 public class MainActivity extends AppCompatActivity{
 
     public static final int TYPE_SELECTION = 1;
-    public static final int HISTORY_RESULT = 1;
+    public static final int HISTORY_RESULT = 2;
     private UnitsConverter.LengthUnits from_unit_length = UnitsConverter.LengthUnits.Meters;
     private UnitsConverter.LengthUnits to_unit_length = UnitsConverter.LengthUnits.Yards;
     private UnitsConverter.VolumeUnits from_unit_volume = UnitsConverter.VolumeUnits.Liters;
@@ -71,7 +75,14 @@ public class MainActivity extends AppCompatActivity{
 
                     }
 
-                    InputMethodManager inputManager = (InputMethodManager)
+                    HistoryContent.HistoryItem Output = new HistoryContent.HistoryItem
+                            (Double.parseDouble(from_input.getText().toString()),
+                                    Double.parseDouble(to_input.getText().toString()),
+                                    UnitType, from_label.getText().toString(), to_label.getText().toString(), DateTime.now());
+
+                    HistoryContent.addItem(Output);
+
+                   InputMethodManager inputManager = (InputMethodManager)
                             getSystemService(Context.INPUT_METHOD_SERVICE);
 
                     inputManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(),
@@ -177,11 +188,11 @@ public class MainActivity extends AppCompatActivity{
         }else if (resultCode == HISTORY_RESULT){
             String[] vals = data.getStringArrayExtra("item");
             this.from_input.setText(vals[0]);
-            this.from_input.setText(vals[1]);
-            //this.mode = Mode.valueOf(vals[2]);
+            this.to_input.setText(vals[1]);
+            this.UnitType = UnitType.valueOf(vals[2]);
             this.from_label.setText(vals[3]);
             this.to_label.setText(vals[4]);
-            //this.title.setText(mode.toString() + " Converter");
+            this.title.setText(UnitType + " Converter");
         }
 
     }

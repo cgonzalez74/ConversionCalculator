@@ -25,10 +25,10 @@
     <TextView
         android:id="@+id/p1"
         android:layout_width="305dp"
-        android:layout_height="34dp"
-        android:layout_marginEnd="8dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="55dp"
         android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
         android:text="Origination"
         android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
         android:textStyle="bold"

@@ -29,6 +29,15 @@ public class HistoryContent {
 
         public final DateTime timestamp;
 
+        static {
+            DateTime now = DateTime.now();
+            addItem(new HistoryItem(2.0, 1.829, "Length", "Yards", "Meters", now.minusDays(1)));
+            addItem(new HistoryItem(1.0, 3.785, "Volume", "Gallons", "Liters", now.minusDays(1)));
+            addItem(new HistoryItem(2.0, 1.829, "Length", "Yards", "Meters", now.plusDays(1)));
+            addItem(new HistoryItem(1.0, 3.785, "Volume", "Gallons", "Liters", now.plusDays(1)));
+        }
+
+
         public HistoryItem(Double fromVal, Double toVal, String mode,
                            String fromUnits, String toUnits, DateTime timestamp) {
             this.fromVal = fromVal;
