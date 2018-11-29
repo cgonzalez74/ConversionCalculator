@@ -11,8 +11,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.conversioncalculator.dummy.HistoryContent;
-import com.example.conversioncalculator.dummy.HistoryContent.HistoryItem;
+import com.example.conversioncalculator.HistoryContent;
+import com.example.conversioncalculator.HistoryContent.HistoryItem;
+
+import java.util.List;
 
 /**
  * A fragment representing a list of Items.
@@ -24,6 +26,9 @@ public class HistoryFragment extends Fragment {
 
     // TODO: Customize parameters
     private int mColumnCount = 1;
+
+    public List<HistoryItem> allHistory;
+
 
     // TODO: Customize parameter argument names
     private static final String ARG_COLUMN_COUNT = "column-count";
@@ -45,6 +50,7 @@ public class HistoryFragment extends Fragment {
      * fragment (e.g. upon screen orientation changes).
      */
     public HistoryFragment() {
+        allHistory = MainActivity.allHistory;
     }
 
     @Override
@@ -74,7 +80,8 @@ public class HistoryFragment extends Fragment {
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            recyclerView.setAdapter(new HistoryAdapter(HistoryContent.ITEMS, mListener));
+            recyclerView.setAdapter(new HistoryAdapter(allHistory, mListener));
+
         }
         return view;
     }

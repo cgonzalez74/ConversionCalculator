@@ -8,8 +8,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.conversioncalculator.HistoryFragment.OnListFragmentInteractionListener;
-import com.example.conversioncalculator.dummy.HistoryContent;
-import com.example.conversioncalculator.dummy.HistoryContent.HistoryItem;
+import com.example.conversioncalculator.HistoryContent;
+import com.example.conversioncalculator.HistoryContent.HistoryItem;
 import com.truizlop.sectionedrecyclerview.SectionedRecyclerViewAdapter;
 
 import org.joda.time.format.DateTimeFormat;
@@ -20,7 +20,7 @@ import java.util.HashMap;
 import java.util.List;
 
 /**
- * {@link RecyclerView.Adapter} that can display a {@link com.example.conversioncalculator.dummy.HistoryContent.HistoryItem} and makes a call to the
+ * {@link RecyclerView.Adapter} that can display a {@link com.example.conversioncalculator.HistoryContent.HistoryItem} and makes a call to the
  * specified {@link HistoryFragment.OnListFragmentInteractionListener}.
  * TODO: Replace the implementation with code for your data type.
  */
@@ -41,7 +41,7 @@ public class HistoryAdapter extends SectionedRecyclerViewAdapter<HistoryAdapter.
         DateTimeFormatter fmt = DateTimeFormat.forPattern("yyyy-MM-dd");
 
         for (HistoryItem hi : items) {
-            String key = "Entries for " + fmt.print(hi.timestamp);
+            String key = "Entries for " + hi.timestamp;
             List<HistoryItem> list = this.dayValues.get(key);
             if (list == null) {
                 list = new ArrayList<HistoryItem>();
@@ -163,7 +163,7 @@ public class HistoryAdapter extends SectionedRecyclerViewAdapter<HistoryAdapter.
     protected void onBindItemViewHolder(ViewHolder holder, int section, int position) {
         holder.mItem = this.dayValues.get(this.sectionHeaders.get(section)).get(position);
         holder.mP1.setText(holder.mItem.toString());
-        holder.mDateTime.setText(holder.mItem.timestamp.toString());
+        holder.mDateTime.setText(holder.mItem.timestamp);
         if (holder.mItem.mode.equals("Length")) {
             // length icon          holder.mImage.setImageDrawable(holder.mImage.getResources().getDrawable(R.drawable.length_icon));
         } else {

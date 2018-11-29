@@ -8,10 +8,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
-import com.example.conversioncalculator.dummy.HistoryContent;
+import com.example.conversioncalculator.HistoryContent;
 
 public class HistoryActivity extends AppCompatActivity
- implements HistoryFragment.OnListFragmentInteractionListener{
+        implements HistoryFragment.OnListFragmentInteractionListener{
 
     @Override
     public void onListFragmentInteraction(HistoryContent.HistoryItem item){
@@ -40,3 +40,4 @@ public class HistoryActivity extends AppCompatActivity
     }
 
 }
+
